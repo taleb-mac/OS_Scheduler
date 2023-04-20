@@ -23,6 +23,7 @@ def round_robin(process, q, time):
     if process.remaining_time - q <= 0:
         time += process.remaining_time
         process.remaining_time = 0
+        process.finish_time = time
     else:
         time += q
         process.remaining_time -= q
@@ -73,13 +74,26 @@ def scheduler(processes, time=0):
         # Preempt the process if there is a priority 0 process that will arrive in the next time slice
         if q:= check_preempt(processes, 4, time): quantum = q
         else: quantum = 4
+        
+        # Get the user job queue (priority 3) sort it by arrival time then execute one time slice using round_robin
+        
+        if not Process.process_3_queue:
+            Process.process_3_queue = [process for process in processes if process.arrival_time <= time and process.remaining_time and process.priority == 3]
+        else:
+            Process.process_3_queue += sorted([process for process in processes if process.arrival_time <= time and process.remaining_time and process.priority == 3 and process not in Process.process_3_queue], key=lambda x: x.arrival_time)      
+        
+        if priority_3_queue := Process.process_3_queue:
+            process = priority_3_queue.pop(0)
+            time = round_robin(process, quantum, time)
+            if process.remaining_time: 
+                Process.process_3_queue.append(process)
+            continue
+        
+        time += 1
+        
 
 p = read_file('processes.txt')
 scheduler(p)
-        
-        
-        
-        
         
         
         
