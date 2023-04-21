@@ -1,6 +1,4 @@
 from process_classes import Process, Execution
-
-
 def read_file(file_name):
     # Read the file and return a list of processes
     processes = []
@@ -16,9 +14,11 @@ def calculate_times(processes):
         process.waiting_time = process.turnaround_time - process.burst_time
 
 def print_gantt_chart(executions):
-    print("Gantt Chart:")
+    gantt_chart = ''
     for execution in executions:
-        print(execution)
+        gantt_chart += str(execution) + "\n"
+
+    return gantt_chart
 
 def first_comes_first_served(process, time):
     # For real time queue
@@ -68,9 +68,8 @@ def scheduler(processes, time=0):
     while True:
         # Check if all processes are finished and break the loop
         if all([True if process.remaining_time == 0 else False for process in processes]):
-            print_gantt_chart(executions)
             print('All processes are finished')
-            break
+            return print_gantt_chart(executions)
 
         # Find the next arrival time of the remaining processes
         next_arrival_time = min(
