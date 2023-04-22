@@ -1,6 +1,7 @@
 # OS Scheduler
 
-This is a simple operating system process scheduler built using Python and Tkinter.
+A Four-Level Priority Scheduler (simulator) using Python, managing processes across Real-Time and three user priority levels. The scheduler uses a First Come First Served (FCFS) approach for Real-Time processes, while normal user processes employ a three-level feedback queue. The report covers the key components, input and output, and main scheduling functions, showcasing the scheduler's effective prioritization and performance.
+
 
 ## Requirements
 
@@ -12,22 +13,29 @@ This is a simple operating system process scheduler built using Python and Tkint
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/<username>/os-scheduler.git
+   git clone https://github.com/taleb-mac/OS_Scheduler.git
    ```
 
-2. Navigate to the project directory:
+2. Navigate to the `OS_Scheduler/` directory:
 
-   ```bash
-   cd os-scheduler
+   ```
+   OS_Scheduler/
+   ├── dist/
+   │   └── app.exe
+   ├── process_classes.py
+   ├── scheduler.py
+   ├── README.md
+   └── app.py
    ```
 
 3. Run the application:
 
-   ```bash
-   python app.py
-   ```
+   - **Windows**: double-click the `app.exe` file under dist/.
+   - **macOS**: open a terminal window, navigate to the project directory, and run the following command:
 
-   **Note**: If you are on macOS, you may need to run the app using the `python` command instead of double-clicking the `os-scheduler.exe` file.
+     ```bash
+     python app.py
+     ```
 
 ## Usage
 
@@ -54,14 +62,3 @@ Here is an example input file:
 2,2,3
 3,3,2
 ```
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for more information.
-
-## Acknowledgements
-
-- This project was inspired by the operating system scheduling simulation in the book "Operating System Concepts" by Abraham Silberschatz, Peter B. Galvin, and Greg Gagne.
-- The `process_classes.py` module is adapted from a similar module in the "Operating System Concepts" book.
-
-Feel free to modify this template to suit your needs.
